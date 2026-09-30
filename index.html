@@ -23,10 +23,10 @@
 
       <div class="loading-box" aria-hidden="true">
         <div class="loading-label">
-          <span>LOADING LOVE...</span>
-          <span id="loading-percent">100%</span>
+          <span id="bootText">LOADING LOVE...</span>
+          <span id="loading-percent">0%</span>
         </div>
-        <div class="progress"><span></span></div>
+        <div class="progress"><span id="bootProgress"></span></div>
       </div>
 
       <button class="game-button primary" data-next="screen-profile">
@@ -385,6 +385,12 @@
     <div class="secret-toast" id="secret-toast" role="status" aria-live="polite"></div>
 
   </main>
+
+  <!-- Optional user-provided music files. Place trimmed song segments in assets/audio/.
+       Browsers may block autoplay until the first user interaction; DARLING.EXE starts
+       music on the first tap/click and switches tracks automatically by chapter. -->
+  <audio id="bgMusic" preload="auto" loop playsinline></audio>
+  <audio id="sfxAudio" preload="auto"></audio>
 
   <script src="js/app.js"></script>
 </body>

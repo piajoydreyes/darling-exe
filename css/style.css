@@ -517,3 +517,11 @@ body.modal-open{overflow:hidden}
 .memory-center:active{transform:scale(.93)}
 .game-button,.choice-card,.memory-node,.birthday-cake,.shooter-heart{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 @media(max-width:360px){.modal-photo{height:195px}}
+
+/* V4 UI polish */
+.game-button:disabled{opacity:.55;filter:saturate(.45);cursor:not-allowed;transform:none}
+.game-button.boot-ready{animation:bootReady .55s ease both}
+@keyframes bootReady{50%{transform:scale(1.025);box-shadow:0 0 30px rgba(20,123,209,.3),0 10px 25px rgba(230,36,41,.24)}}
+.feedback.feedback-correct{background:rgba(101,230,162,.11);border-color:rgba(101,230,162,.35);color:#b9ffd8}
+.feedback.feedback-wrong{background:rgba(230,36,41,.08);border-color:rgba(230,36,41,.25);color:#ffb4b6}
+#bootProgress{width:0;transition:width .12s linear}

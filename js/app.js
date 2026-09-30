@@ -5,6 +5,107 @@ const state = {
 
 const screens = [...document.querySelectorAll(".screen")];
 
+
+/* =========================================================
+   V4 POLISH — BOOT LOADING + SOUND + CHAPTER MUSIC
+   ========================================================= */
+const $ = (selector) => document.querySelector(selector);
+
+// Real boot sequence for the first page.
+let bootProgress = 0;
+const bootProgressEl = $("#bootProgress");
+const bootPercentEl = $("#loading-percent");
+const bootTextEl = $("#bootText");
+const startGameButton = $("#screen-start [data-next='screen-profile']");
+if (startGameButton) startGameButton.disabled = true;
+if (bootProgressEl) bootProgressEl.style.width = "0%";
+
+const boot = setInterval(() => {
+  bootProgress += 20;
+  if (bootProgressEl) bootProgressEl.style.width = bootProgress + "%";
+  if (bootPercentEl) bootPercentEl.textContent = bootProgress + "%";
+
+  if (bootProgress >= 100) {
+    clearInterval(boot);
+    if (bootTextEl) bootTextEl.textContent = "RJURI.EXE READY. MISSION AVAILABLE.";
+    if (startGameButton) {
+      startGameButton.disabled = false;
+      startGameButton.classList.add("boot-ready");
+    }
+  }
+}, 180);
+
+// Lightweight Web Audio sound effects: no external sound files required.
+let audioContext = null;
+function ensureAudioContext() {
+  if (!audioContext) {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (AudioCtx) audioContext = new AudioCtx();
+  }
+  if (audioContext?.state === "suspended") audioContext.resume().catch(() => {});
+  return audioContext;
+}
+
+function playTone(type = "click") {
+  const ctx = ensureAudioContext();
+  if (!ctx) return;
+  const now = ctx.currentTime;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  const settings = {
+    click: {freq: 520, end: 680, duration: .07, volume: .035, wave: "square"},
+    page: {freq: 300, end: 620, duration: .16, volume: .045, wave: "sine"},
+    correct: {freq: 520, end: 880, duration: .22, volume: .055, wave: "triangle"},
+    wrong: {freq: 220, end: 130, duration: .16, volume: .045, wave: "sawtooth"},
+    catch: {freq: 720, end: 1040, duration: .09, volume: .045, wave: "triangle"},
+    hit: {freq: 180, end: 90, duration: .09, volume: .05, wave: "square"},
+    win: {freq: 520, end: 1040, duration: .35, volume: .055, wave: "sine"}
+  }[type] || {freq: 520, end: 680, duration: .07, volume: .035, wave: "square"};
+
+  osc.type = settings.wave;
+  osc.frequency.setValueAtTime(settings.freq, now);
+  osc.frequency.exponentialRampToValueAtTime(Math.max(40, settings.end), now + settings.duration);
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(settings.volume, now + .01);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + settings.duration);
+  osc.start(now);
+  osc.stop(now + settings.duration + .02);
+}
+
+const bgMusic = $("#bgMusic");
+const MUSIC = {
+  start: "assets/audio/sunflower.mp3",
+  birthday: "assets/audio/birthday-bridge.mp3",
+  monthsary: "assets/audio/photograph-bridge.mp3"
+};
+let musicChapter = "";
+
+function setMusic(chapter) {
+  if (!bgMusic || !MUSIC[chapter] || musicChapter === chapter) return;
+  musicChapter = chapter;
+  bgMusic.src = MUSIC[chapter];
+  bgMusic.volume = chapter === "start" ? 0.16 : 0.13;
+  bgMusic.currentTime = 0;
+  bgMusic.play().catch(() => {
+    // Autoplay can be blocked. The first user interaction retries it below.
+  });
+}
+
+function resumeMusic() {
+  ensureAudioContext();
+  if (bgMusic?.src) bgMusic.play().catch(() => {});
+  else setMusic(musicChapter || "start");
+}
+
+// Start music as soon as possible, then retry after the first user gesture.
+setMusic("start");
+document.addEventListener("pointerdown", resumeMusic, {once: false});
+document.addEventListener("keydown", resumeMusic, {once: false});
+
+
 function updateXP(amount = 0) {
   state.xp += amount;
   localStorage.setItem("darlingXP", String(state.xp));
@@ -14,27 +115,53 @@ function updateXP(amount = 0) {
 }
 
 function showScreen(id) {
+  const previous = state.currentScreen;
   screens.forEach(screen => screen.classList.toggle("active", screen.id === id));
   state.currentScreen = id;
   window.scrollTo({ top: 0, behavior: "instant" });
+
+  if (previous !== id) {
+    playTone("page");
+    if (id === "screen-birthday") {
+      setMusic("birthday");
+      playTone("win");
+    } else if (id === "screen-monthsary") {
+      setMusic("monthsary");
+      playTone("win");
+    }
+  }
 }
 
 document.querySelectorAll("[data-next]").forEach(button => {
-  button.addEventListener("click", () => showScreen(button.dataset.next));
+  button.addEventListener("click", () => {
+    playTone("click");
+    resumeMusic();
+    showScreen(button.dataset.next);
+  });
 });
 
-/* V1 HERO CHOICE — retained */
+/* V1 HERO CHOICE — retained, with feedback state reset on every choice */
 document.querySelectorAll(".choice-card").forEach(card => {
   card.addEventListener("click", () => {
+    resumeMusic();
     const feedback = document.getElementById("hero-feedback");
     const next = document.getElementById("hero-next");
+
+    // Always clear the previous feedback styling first.
+    feedback.classList.remove("feedback-wrong", "feedback-correct");
+    feedback.style.background = "";
+    feedback.style.borderColor = "";
+    feedback.style.color = "";
+    document.querySelectorAll(".choice-card").forEach(c => c.classList.remove("correct-hit"));
 
     if (card.dataset.correct === "true") {
       document.querySelectorAll(".choice-card").forEach(c => c.disabled = true);
       card.classList.add("correct-hit");
       updateXP(100);
+      playTone("correct");
 
       feedback.hidden = false;
+      feedback.classList.add("feedback-correct");
       feedback.innerHTML = `
         <strong>💥 CORRECT!</strong><br>
         HERO IDENTIFIED.<br>
@@ -42,14 +169,13 @@ document.querySelectorAll(".choice-card").forEach(card => {
       `;
       next.classList.remove("hidden");
     } else {
+      playTone("wrong");
       card.classList.remove("wrong");
       void card.offsetWidth;
       card.classList.add("wrong");
 
       feedback.hidden = false;
-      feedback.style.background = "rgba(230,36,41,.08)";
-      feedback.style.borderColor = "rgba(230,36,41,.25)";
-      feedback.style.color = "#ffb4b6";
+      feedback.classList.add("feedback-wrong");
       feedback.innerHTML = `
         <strong>❌ NOT QUITE.</strong><br>
         Try again, Player 01. 👀
@@ -153,6 +279,7 @@ document.querySelectorAll(".memory-node").forEach(node => {
     document.getElementById("memory-title").textContent = m.title;
     document.getElementById("memory-text").textContent = m.text;
     updateXP(10);
+    playTone("click");
   });
 });
 
@@ -229,6 +356,7 @@ function spawnHeart() {
     event.stopPropagation();
     if (!shooterRunning) return;
     hearts++;
+    playTone("catch");
     document.getElementById("heart-count").textContent = hearts;
     heart.remove();
     if (hearts >= 10) {
@@ -287,6 +415,7 @@ document.addEventListener("click", (event) => {
 let bossHP = 100;
 
 document.getElementById("birthday-cake").addEventListener("click", () => {
+  playTone("hit");
   bossHP = Math.max(0, bossHP - 10);
   document.getElementById("boss-hp-bar").style.width = `${bossHP}%`;
   document.getElementById("boss-hp-text").textContent = bossHP;
@@ -304,6 +433,7 @@ document.getElementById("birthday-cake").addEventListener("click", () => {
 
 /* V2 RESTART */
 document.getElementById("restart-v2").addEventListener("click", () => {
+  playTone("click");
   clearShooter();
   bossHP = 100;
   document.getElementById("boss-hp-bar").style.width = "100%";
