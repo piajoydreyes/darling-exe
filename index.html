@@ -1,399 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#080B16">
-  <title>DARLING.EXE — The Birthday Mission</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <main id="game" aria-live="polite">
 
-    <!-- SCREEN 01: START -->
-    <section class="screen active" id="screen-start">
-      <div class="web-bg" aria-hidden="true"></div>
-      <div class="spider-icon" aria-hidden="true">🕷️</div>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#080B16">
 
-      <p class="system-text">SYSTEM ONLINE</p>
-      <h1>DARLING<span>.EXE</span></h1>
-      <p class="subtitle">THE BIRTHDAY MISSION</p>
+    <title>DARLING.EXE — The Birthday Mission</title>
 
-      <div class="date-chip">OCTOBER 08, 2026</div>
+    <link rel="stylesheet" href="css/style.css">
 
-      <div class="loading-box" aria-hidden="true">
-        <div class="loading-label">
-          <span id="bootText">LOADING LOVE...</span>
-          <span id="loading-percent">0%</span>
+  </head>
+
+  <body>
+    <main id="game" aria-live="polite">
+
+      <!-- SCREEN 01: START -->
+      <section class="screen active" id="screen-start">
+        <div class="web-bg" aria-hidden="true"></div>
+        <div class="spider-icon" aria-hidden="true">🕷️</div>
+
+        <p class="system-text">SYSTEM ONLINE</p>
+        <h1>DARLING<span>.EXE</span></h1>
+        <p class="subtitle">27TH BIRTHDAY MISSION</p>
+
+        <div class="date-chip">OCTOBER 08, 2026</div>
+
+        <div class="loading-box" aria-hidden="true">
+          <div class="loading-label">
+            <span id="bootText">LOADING LOVE...</span>
+            <span id="loading-percent">0%</span>
+          </div>
+          <div class="progress"><span id="bootProgress"></span></div>
         </div>
-        <div class="progress"><span id="bootProgress"></span></div>
-      </div>
 
-      <button class="game-button primary" data-next="screen-profile">
-        START GAME <span>→</span>
-      </button>
-
-      <p class="tiny-note">A tiny game made with love. ❤️</p>
-    </section>
-
-    <!-- SCREEN 02: PROFILE -->
-    <section class="screen" id="screen-profile">
-      <div class="topbar">
-        <span>🕷️ DARLING.EXE</span>
-        <span>❤️ <b id="xp-profile">000</b></span>
-      </div>
-
-      <div class="mission-number">PLAYER PROFILE</div>
-
-      <div class="profile-card comic-card">
-        <div class="card-corner">PLAYER 01</div>
-        <div class="profile-avatar">
-            <img src="assets/images/photos/jo2.jpg" alt="RJURI">
-        </div>
-        <p class="eyebrow">PLAYER IDENTIFIED</p>
-        <h2 id="boyfriend-name">MY DARLING</h2>
-
-        <div class="stat-row">
-          <span>CLASS</span>
-          <strong>BOYFRIEND</strong>
-        </div>
-        <div class="stat-row">
-          <span>LEVEL</span>
-          <strong>∞</strong>
-        </div>
-        <div class="stat-row">
-          <span>SPECIAL ABILITY</span>
-          <strong>MAKING PIA HAPPY</strong>
-        </div>
-        <div class="stat-row">
-          <span>WEAKNESS</span>
-          <strong>PIA'S PUPPY EYES</strong>
-        </div>
-      </div>
-
-      <p class="flavor-text">A special mission has been assigned to you.</p>
-
-      <button class="game-button primary" data-next="screen-briefing">
-        ACCEPT MISSION <span>→</span>
-      </button>
-    </section>
-
-    <!-- SCREEN 03: BRIEFING -->
-    <section class="screen" id="screen-briefing">
-      <div class="comic-burst">!</div>
-      <div class="mission-number">MISSION 01</div>
-      <h2>THE HERO</h2>
-
-      <div class="comic-panel">
-        <div class="panel-label">MISSION BRIEFING</div>
-        <p>Something strange has happened...</p>
-        <p>A very special person has leveled up another year.</p>
-        <p>Our sensors have detected one extremely important hero.</p>
-      </div>
-
-      <div class="hint-box">
-        <span>🕷️ HINT</span>
-        <p>He's probably looking at this screen right now. 👀</p>
-      </div>
-
-      <button class="game-button primary" data-next="screen-hero">
-        FIND THE HERO <span>→</span>
-      </button>
-    </section>
-
-    <!-- SCREEN 04: HERO CHOICE -->
-    <section class="screen" id="screen-hero">
-      <div class="topbar">
-        <span>MISSION 01 / 04</span>
-        <span>❤️ <b id="xp-hero">000</b></span>
-      </div>
-
-      <div class="mission-number">WHO IS TODAY'S HERO?</div>
-      <p class="flavor-text">Choose carefully, Player 01.</p>
-
-      <div class="choice-grid">
-        <button class="choice-card" data-correct="false">
-          <span class="choice-emoji">🐱</span>
-          <strong>THE CAT</strong>
-          <small>probably</small>
+        <button class="game-button primary" data-next="screen-profile">
+          START GAME <span>→</span>
         </button>
 
-        <button class="choice-card" data-correct="false">
-          <span class="choice-emoji">🕷️</span>
-          <strong>THE SPIDER</strong>
-          <small>close enough</small>
+        <p class="tiny-note">A tiny game made with love. ❤️</p>
+      </section>
+
+      <!-- SCREEN 02: PROFILE -->
+      <section class="screen" id="screen-profile">
+        <div class="topbar">
+          <span>🕷️ DARLING.EXE</span>
+          <span>❤️ <b id="xp-profile">000</b></span>
+        </div>
+
+        <div class="mission-number">PLAYER PROFILE</div>
+
+        <div class="profile-card comic-card">
+          <div class="card-corner">PLAYER 01</div>
+          <div class="profile-avatar">
+              <img src="assets/images/photos/jo2.jpg" alt="RJURI">
+          </div>
+          <p class="eyebrow">PLAYER IDENTIFIED</p>
+          <h2 id="boyfriend-name">MY DARLING</h2>
+
+          <div class="stat-row">
+            <span>CLASS</span>
+            <strong>BOYFRIEND</strong>
+          </div>
+          <div class="stat-row">
+            <span>LEVEL</span>
+            <strong>∞</strong>
+          </div>
+          <div class="stat-row">
+            <span>SPECIAL ABILITY</span>
+            <strong>MAKING PIA HAPPY</strong>
+          </div>
+          <div class="stat-row">
+            <span>WEAKNESS</span>
+            <strong>PIA'S PUPPY[GLARE] EYES</strong>
+          </div>
+        </div>
+
+        <p class="flavor-text">A special mission has been assigned to you.</p>
+
+        <button class="game-button primary" data-next="screen-briefing">
+          ACCEPT MISSION <span>→</span>
+        </button>
+      </section>
+
+      <!-- SCREEN 03: BRIEFING -->
+      <section class="screen" id="screen-briefing">
+        <div class="comic-burst">!</div>
+        <div class="mission-number">MISSION 01</div>
+        <h2>THE HERO</h2>
+
+        <div class="comic-panel">
+          <div class="panel-label">MISSION BRIEFING</div>
+          <p>Something strange has happened...</p>
+          <p>A very special person has leveled up another year.</p>
+          <p>Our sensors have detected one extremely important hero.</p>
+        </div>
+
+        <div class="hint-box">
+          <span>🕷️ HINT</span>
+          <p>He's probably looking at this screen right now. 👀</p>
+        </div>
+
+        <button class="game-button primary" data-next="screen-hero">
+          FIND THE HERO <span>→</span>
+        </button>
+      </section>
+
+      <!-- SCREEN 04: MISSION 1 - HERO CHOICE -->
+      <section class="screen" id="screen-hero">
+        <div class="topbar">
+          <span>MISSION 01 / 04</span>
+          <span>❤️ <b id="xp-hero">000</b></span>
+        </div>
+
+        <div class="mission-number">WHO IS TODAY'S HERO?</div>
+        <p class="flavor-text">Choose carefully, Player 01.</p>
+
+        <div class="choice-grid">
+          <button class="choice-card" data-correct="false">
+            <span class="choice-emoji">🐱</span>
+            <strong>THE CAT</strong>
+            <small>probably</small>
+          </button>
+
+          <button class="choice-card" data-correct="false">
+            <span class="choice-emoji">🕷️</span>
+            <strong>THE SPIDER</strong>
+            <small>close enough</small>
+          </button>
+
+          <button class="choice-card correct" data-correct="true">
+            <span class="choice-emoji">😎</span>
+            <strong>YOU</strong>
+            <small>obviously</small>
+          </button>
+        </div>
+
+        <div class="feedback" id="hero-feedback" hidden></div>
+
+        <button class="game-button primary hidden" id="hero-next" data-next="screen-memory">
+          NEXT MISSION <span>→</span>
+        </button>
+      </section>
+
+      <!-- SCREEN 05: MISSION 2 - MEMORY WEB -->
+      <section class="screen" id="screen-memory">
+        <div class="topbar">
+          <span>MISSION 02 / 05</span>
+          <span>❤️ <b id="xp-memory">000</b></span>
+        </div>
+
+        <div class="mission-number">MISSION 02</div>
+        <h2>MEMORY WEB</h2>
+        <p class="flavor-text">Every little adventure is connected. 🕸️</p>
+
+        <div class="memory-web" id="memory-web">
+          <button class="memory-node memory-1" data-memory="first-date" aria-label="First date">🎬</button>
+          <button class="memory-node memory-2" data-memory="cafes" aria-label="Cafe hopping">☕</button>
+          <button class="memory-node memory-3" data-memory="food" aria-label="Food adventures">🍽️</button>
+          <button class="memory-node memory-4" data-memory="rides" aria-label="Motorcycle rides">🏍️</button>
+          <button class="memory-node memory-5" data-memory="games" aria-label="Game time">🎮</button>
+          <button class="memory-node memory-6" data-memory="secret" aria-label="Secret memory">♡</button>
+          <button class="memory-center" id="jo-secret" type="button" aria-label="Secret Jo node">JO<span>♡</span></button>
+        </div>
+
+        <button class="memory-card comic-card memory-card-button" id="memory-card" type="button" aria-label="Open selected memory">
+          <div class="memory-image" id="memory-image">📸</div>
+          <div>
+            <div class="panel-label" id="memory-label">TAP A MEMORY</div>
+            <h3 id="memory-title">Our story is loading...</h3>
+            <p id="memory-text">Tap one of the web nodes to open a memory.</p>
+          </div>
         </button>
 
-        <button class="choice-card correct" data-correct="true">
-          <span class="choice-emoji">😎</span>
-          <strong>HIM</strong>
-          <small>obviously</small>
+        <p class="memory-note">Tap a node, then tap the memory card to open it. ♡</p>
+
+        <button class="game-button primary" data-next="screen-shooter">
+          NEXT MISSION <span>→</span>
         </button>
-      </div>
+      </section>
 
-      <div class="feedback" id="hero-feedback" hidden></div>
-
-      <button class="game-button primary hidden" id="hero-next" data-next="screen-memory">
-        NEXT MISSION <span>→</span>
-      </button>
-    </section>
-
-
-    <!-- V2 SCREEN 05: MEMORY WEB -->
-    <section class="screen" id="screen-memory">
-      <div class="topbar">
-        <span>MISSION 02 / 05</span>
-        <span>❤️ <b id="xp-memory">000</b></span>
-      </div>
-
-      <div class="mission-number">MISSION 02</div>
-      <h2>MEMORY WEB</h2>
-      <p class="flavor-text">Every little adventure is connected. 🕸️</p>
-
-      <div class="memory-web" id="memory-web">
-        <button class="memory-node memory-1" data-memory="first-date" aria-label="First date">🎬</button>
-        <button class="memory-node memory-2" data-memory="cafes" aria-label="Cafe hopping">☕</button>
-        <button class="memory-node memory-3" data-memory="food" aria-label="Food adventures">🍽️</button>
-        <button class="memory-node memory-4" data-memory="rides" aria-label="Motorcycle rides">🏍️</button>
-        <button class="memory-node memory-5" data-memory="games" aria-label="Game time">🎮</button>
-        <button class="memory-node memory-6" data-memory="secret" aria-label="Secret memory">♡</button>
-        <button class="memory-center" id="jo-secret" type="button" aria-label="Secret Jo node">JO<span>♡</span></button>
-      </div>
-
-      <button class="memory-card comic-card memory-card-button" id="memory-card" type="button" aria-label="Open selected memory">
-        <div class="memory-image" id="memory-image">📸</div>
-        <div>
-          <div class="panel-label" id="memory-label">TAP A MEMORY</div>
-          <h3 id="memory-title">Our story is loading...</h3>
-          <p id="memory-text">Tap one of the web nodes to open a memory.</p>
+      <!-- SCREEN 06: MISSION 3 -WEB SHOOTER -->
+      <section class="screen" id="screen-shooter">
+        <div class="topbar">
+          <span>MISSION 03 / 05</span>
+          <span>❤️ <b id="heart-count">0</b>/10</span>
         </div>
-      </button>
 
-      <p class="memory-note">Tap a node, then tap the memory card to open it. ♡</p>
+        <div class="mission-number">MISSION 03</div>
+        <h2>WEB SHOOTER</h2>
+        <p class="flavor-text">Catch 10 hearts before the timer runs out. THWIP!</p>
 
-      <button class="game-button primary" data-next="screen-shooter">
-        NEXT MISSION <span>→</span>
-      </button>
-    </section>
+        <div class="shooter-arena" id="shooter-arena">
+          <div class="shooter-timer" id="shooter-timer">20</div>
+          <div class="shooter-message" id="shooter-message">READY?</div>
+        </div>
 
-    <!-- V2 SCREEN 06: WEB SHOOTER -->
-    <section class="screen" id="screen-shooter">
-      <div class="topbar">
-        <span>MISSION 03 / 05</span>
-        <span>❤️ <b id="heart-count">0</b>/10</span>
-      </div>
+        <button class="game-button primary" id="start-shooter">START WEB SHOOTER</button>
 
-      <div class="mission-number">MISSION 03</div>
-      <h2>WEB SHOOTER</h2>
-      <p class="flavor-text">Catch 10 hearts before the timer runs out. THWIP!</p>
+        <button class="game-button primary hidden" id="shooter-next" data-next="screen-boss">
+          BOSS BATTLE <span>→</span>
+        </button>
+      </section>
 
-      <div class="shooter-arena" id="shooter-arena">
-        <div class="shooter-timer" id="shooter-timer">20</div>
-        <div class="shooter-message" id="shooter-message">READY?</div>
-      </div>
+      <!-- SCREEN 07: MISSION 4 - BIRTHDAY BOSS -->
+      <section class="screen" id="screen-boss">
+        <div class="topbar">
+          <span>FINAL BOSS</span>
+          <span>HP <b id="boss-hp-text">100</b></span>
+        </div>
 
-      <button class="game-button primary" id="start-shooter">START WEB SHOOTER</button>
+        <div class="mission-number">MISSION 04</div>
+        <h2>BIRTHDAY BOSS</h2>
+        <p class="flavor-text">Defeat the cake. Save the birthday. 🎂</p>
 
-      <button class="game-button primary hidden" id="shooter-next" data-next="screen-boss">
-        BOSS BATTLE <span>→</span>
-      </button>
-    </section>
+        <div class="boss-bar">
+          <span id="boss-hp-bar"></span>
+        </div>
 
-    <!-- V2 SCREEN 07: BIRTHDAY BOSS -->
-    <section class="screen" id="screen-boss">
-      <div class="topbar">
-        <span>FINAL BOSS</span>
-        <span>HP <b id="boss-hp-text">100</b></span>
-      </div>
+        <button class="birthday-cake" id="birthday-cake">🎂</button>
+        <div class="boss-feedback" id="boss-feedback">TAP TO ATTACK!</div>
+      </section>
 
-      <div class="mission-number">MISSION 04</div>
-      <h2>BIRTHDAY BOSS</h2>
-      <p class="flavor-text">Defeat the cake. Save the birthday. 🎂</p>
+      <!-- SCREEN 08: BIRTHDAY REVEAL -->
+      <section class="screen reveal-screen" id="screen-birthday">
+        <div class="confetti">✦ ✧ ✦ ✧ ✦</div>
+        <div class="mission-number">MISSION COMPLETE</div>
+        <h2>HAPPY BIRTHDAY,<br>RJURI 🥳</h2>
 
-      <div class="boss-bar">
-        <span id="boss-hp-bar"></span>
-      </div>
+        <p class="birthday-line">My Jo, My Darling ❤️</p>
 
-      <button class="birthday-cake" id="birthday-cake">🎂</button>
-      <div class="boss-feedback" id="boss-feedback">TAP TO ATTACK!</div>
-    </section>
+        <div class="letter-card comic-card">
+          <div class="panel-label">MESSAGE FROM PIA</div>
+          <p class="placeholder-message">[ BIRTHDAY MESSAGE GOES HERE ]</p>
+          <p class="small-note">PS. I know you'll cry, my big cry-baby 😂😋</p>
+        </div>
 
-    <!-- V2 SCREEN 08: BIRTHDAY REVEAL -->
-    <section class="screen reveal-screen" id="screen-birthday">
-      <div class="confetti">✦ ✧ ✦ ✧ ✦</div>
-      <div class="mission-number">MISSION COMPLETE</div>
-      <h2>HAPPY BIRTHDAY,<br>RJURI.</h2>
+        <div class="song-card">
+          <span>♫</span>
+          <div>
+            <strong>Kalapastangan</strong>
+            <small>Fitterkarma</small>
+          </div>
+        </div>
 
-      <p class="birthday-line">My Jo. My Darling. ❤️</p>
+        <button class="game-button primary" data-next="screen-monthsary">
+          ANOTHER MISSION <span>→</span>
+        </button>
+      </section>
 
-      <div class="letter-card comic-card">
-        <div class="panel-label">MESSAGE FROM PIA</div>
-        <p class="placeholder-message">[ BIRTHDAY MESSAGE GOES HERE ]</p>
-        <p class="small-note">We'll fill this in together when you're ready. 🥹</p>
-      </div>
+      <!-- SCREEN 09: MONTHSARY -->
+      <section class="screen soft-screen" id="screen-monthsary">
+        <div class="mission-number">NEW MISSION DETECTED</div>
+        <h2>US,<br>DARLING.</h2>
 
-      <div class="song-card">
-        <span>♫</span>
-        <div>
-          <strong>Kalapastangan</strong>
-          <small>Fitterkarma</small>
+        <div class="unlock-card comic-card">
+          <div class="unlock-heart">♡</div>
+          <div class="panel-label">MISSION 05</div>
+          <strong>OUR MONTHSARY</strong>
+          <small>OCTOBER 09 • 2026</small>
+        </div>
+
+        <p class="flavor-text">One more chapter of us. One more favorite day.</p>
+
+        <div class="song-card">
+          <span>♫</span>
+          <div>
+            <strong>Photograph</strong>
+            <small>Keenan Te</small>
+          </div>
+        </div>
+
+        <button class="game-button primary" data-next="screen-story">
+          OPEN OUR STORY <span>→</span>
+        </button>
+      </section>
+
+      <!-- SCREEN 10: STORY -->
+      <section class="screen" id="screen-story">
+        <div class="topbar">
+          <span>MISSION 05</span>
+          <span>US, DARLING</span>
+        </div>
+
+        <div class="mission-number">OUR STORY</div>
+        <h2>THE LITTLE<br>ADVENTURES</h2>
+
+        <div class="story-list">
+          <article class="story-item comic-card">
+            <span>01</span>
+            <div>
+              <strong>FIRST MONTH TOGETHER</strong>
+              <p>Full of Adventures Day! </p>
+              <small>[ Add your date, movie, restaurant, and photo later. ]</small>
+            </div>
+          </article>
+
+          <article class="story-item comic-card">
+            <span>02</span>
+            <div>
+              <strong>CAFE HOPPING</strong>
+              <p>Coffee, food, conversations, repeat. ☕</p>
+              <small>[ Add a favorite cafe later. ]</small>
+            </div>
+          </article>
+
+          <article class="story-item comic-card">
+            <span>03</span>
+            <div>
+              <strong>MOTORCYCLE QUESTS</strong>
+              <p>Riding around looking for somewhere to go. 🏍️</p>
+              <small>[ Add a favorite ride/place later. ]</small>
+            </div>
+          </article>
+
+          <article class="story-item comic-card">
+            <span>04</span>
+            <div>
+              <strong>STILL LOADING...</strong>
+              <p>More memories coming soon. ♡</p>
+              <small>[ You can add them whenever you remember. ]</small>
+            </div>
+          </article>
+        </div>
+
+        <div class="story-secret comic-card">
+          <span>🕷️ SPIDER-SENSE</span>
+          <p>Some memories don't have a date yet. That's okay. We can keep adding our little adventures.</p>
+        </div>
+
+        <button class="game-button primary" data-next="screen-letter">
+          CONTINUE <span>→</span>
+        </button>
+      </section>
+
+      <!-- SCREEN 11: LOVE LETTER -->
+      <section class="screen soft-screen" id="screen-letter">
+        <div class="mission-number">FROM ME TO MY JO</div>
+        <h2>FOR MY<br>DARLING.</h2>
+
+        <div class="love-letter">
+          <p>[ WRITE YOUR MONTHSARY MESSAGE HERE ]</p>
+          <p>[ Talk about your first date, cafe hopping, food adventures, motorcycle rides, games, Spider-Man, or simply what it feels like having him beside you. ]</p>
+          <p>Love,<br><strong>[ YOUR NAME / NICKNAME ]</strong> ♡</p>
+        </div>
+
+        <div class="couple-stats comic-card">
+          <div><span>LOVE</span><strong>∞</strong></div>
+          <div><span>FOOD</span><strong>100%</strong></div>
+          <div><span>ADVENTURES</span><strong>∞</strong></div>
+          <div><span>US</span><strong>♡</strong></div>
+        </div>
+
+        <button class="game-button primary" data-next="screen-final">
+          FINISH GAME <span>♡</span>
+        </button>
+      </section>
+
+      <!--  SCREEN 12: FINAL -->
+      <section class="screen final-screen" id="screen-final">
+        <div class="final-spider">🕷️</div>
+        <div class="mission-number">GAME COMPLETE</div>
+        <h2>YOU UNLOCKED<br>MY HEART.</h2>
+
+        <div class="completion-ring">
+          <strong>100%</strong>
+          <small>LOVE QUEST COMPLETE</small>
+        </div>
+
+        <p class="flavor-text">Thank you for being my favorite person to go nowhere and everywhere with.</p>
+        <p class="final-love">I love you, Jo. ❤️</p>
+
+        <button class="game-button primary" id="restart-">PLAY AGAIN</button>
+        <p class="tiny-note">P.S. There are still secret memories to unlock. 🕸️</p>
+      </section>
+
+      <!-- : MEMORY GALLERY / SECRET WEB -->
+      <div class="memory-modal" id="memory-modal" hidden aria-hidden="true">
+        <div class="memory-modal-backdrop" data-close-memory></div>
+        <div class="memory-modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-memory-title">
+          <button class="modal-close" type="button" data-close-memory aria-label="Close memory">×</button>
+          <div class="modal-photo" id="modal-memory-photo">📸</div>
+          <div class="panel-label" id="modal-memory-label">MEMORY</div>
+          <h3 id="modal-memory-title">Our little moment</h3>
+          <p id="modal-memory-copy">A little piece of us.</p>
+          <p class="modal-placeholder" id="modal-memory-note">Add a photo later by replacing the matching file in assets/images/photos/.</p>
         </div>
       </div>
 
-      <button class="game-button primary" data-next="screen-monthsary">
-        ANOTHER MISSION <span>→</span>
-      </button>
-    </section>
+      <div class="secret-toast" id="secret-toast" role="status" aria-live="polite"></div>
 
-    <!-- V2 SCREEN 09: MONTHSARY -->
-    <section class="screen soft-screen" id="screen-monthsary">
-      <div class="mission-number">NEW MISSION DETECTED</div>
-      <h2>US,<br>DARLING.</h2>
+    </main>
 
-      <div class="unlock-card comic-card">
-        <div class="unlock-heart">♡</div>
-        <div class="panel-label">MISSION 05</div>
-        <strong>OUR MONTHSARY</strong>
-        <small>OCTOBER 09 • 2026</small>
-      </div>
+    <audio id="bgMusic" preload="auto" loop playsinline></audio>
+    <audio id="sfxAudio" preload="auto"></audio>
 
-      <p class="flavor-text">One more chapter of us. One more favorite day.</p>
-
-      <div class="song-card">
-        <span>♫</span>
-        <div>
-          <strong>Photograph</strong>
-          <small>Keenan Te</small>
-        </div>
-      </div>
-
-      <button class="game-button primary" data-next="screen-story">
-        OPEN OUR STORY <span>→</span>
-      </button>
-    </section>
-
-    <!-- V2 SCREEN 10: STORY -->
-    <section class="screen" id="screen-story">
-      <div class="topbar">
-        <span>MISSION 05</span>
-        <span>US, DARLING</span>
-      </div>
-
-      <div class="mission-number">OUR STORY</div>
-      <h2>THE LITTLE<br>ADVENTURES</h2>
-
-      <div class="story-list">
-        <article class="story-item comic-card">
-          <span>01</span>
-          <div>
-            <strong>THE FIRST DATE</strong>
-            <p>Movie + steakhouse. 🎬🥩</p>
-            <small>[ Add your date, movie, restaurant, and photo later. ]</small>
-          </div>
-        </article>
-
-        <article class="story-item comic-card">
-          <span>02</span>
-          <div>
-            <strong>CAFE HOPPING</strong>
-            <p>Coffee, food, conversations, repeat. ☕</p>
-            <small>[ Add a favorite cafe later. ]</small>
-          </div>
-        </article>
-
-        <article class="story-item comic-card">
-          <span>03</span>
-          <div>
-            <strong>MOTORCYCLE QUESTS</strong>
-            <p>Riding around looking for somewhere to go. 🏍️</p>
-            <small>[ Add a favorite ride/place later. ]</small>
-          </div>
-        </article>
-
-        <article class="story-item comic-card">
-          <span>04</span>
-          <div>
-            <strong>STILL LOADING...</strong>
-            <p>More memories coming soon. ♡</p>
-            <small>[ You can add them whenever you remember. ]</small>
-          </div>
-        </article>
-      </div>
-
-      <div class="story-secret comic-card">
-        <span>🕷️ SPIDER-SENSE</span>
-        <p>Some memories don't have a date yet. That's okay. We can keep adding our little adventures.</p>
-      </div>
-
-      <button class="game-button primary" data-next="screen-letter">
-        CONTINUE <span>→</span>
-      </button>
-    </section>
-
-    <!-- V2 SCREEN 11: LOVE LETTER -->
-    <section class="screen soft-screen" id="screen-letter">
-      <div class="mission-number">FROM ME TO MY JO</div>
-      <h2>FOR MY<br>DARLING.</h2>
-
-      <div class="love-letter">
-        <p>[ WRITE YOUR MONTHSARY MESSAGE HERE ]</p>
-        <p>[ Talk about your first date, cafe hopping, food adventures, motorcycle rides, games, Spider-Man, or simply what it feels like having him beside you. ]</p>
-        <p>Love,<br><strong>[ YOUR NAME / NICKNAME ]</strong> ♡</p>
-      </div>
-
-      <div class="couple-stats comic-card">
-        <div><span>LOVE</span><strong>∞</strong></div>
-        <div><span>FOOD</span><strong>100%</strong></div>
-        <div><span>ADVENTURES</span><strong>∞</strong></div>
-        <div><span>US</span><strong>♡</strong></div>
-      </div>
-
-      <button class="game-button primary" data-next="screen-final">
-        FINISH GAME <span>♡</span>
-      </button>
-    </section>
-
-    <!-- V2 SCREEN 12: FINAL -->
-    <section class="screen final-screen" id="screen-final">
-      <div class="final-spider">🕷️</div>
-      <div class="mission-number">GAME COMPLETE</div>
-      <h2>YOU UNLOCKED<br>MY HEART.</h2>
-
-      <div class="completion-ring">
-        <strong>100%</strong>
-        <small>LOVE QUEST COMPLETE</small>
-      </div>
-
-      <p class="flavor-text">Thank you for being my favorite person to go nowhere and everywhere with.</p>
-      <p class="final-love">I love you, Jo. ❤️</p>
-
-      <button class="game-button primary" id="restart-v2">PLAY AGAIN</button>
-      <p class="tiny-note">P.S. There are still secret memories to unlock. 🕸️</p>
-    </section>
-
-    <!-- V3: MEMORY GALLERY / SECRET WEB -->
-    <div class="memory-modal" id="memory-modal" hidden aria-hidden="true">
-      <div class="memory-modal-backdrop" data-close-memory></div>
-      <div class="memory-modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-memory-title">
-        <button class="modal-close" type="button" data-close-memory aria-label="Close memory">×</button>
-        <div class="modal-photo" id="modal-memory-photo">📸</div>
-        <div class="panel-label" id="modal-memory-label">MEMORY</div>
-        <h3 id="modal-memory-title">Our little moment</h3>
-        <p id="modal-memory-copy">A little piece of us.</p>
-        <p class="modal-placeholder" id="modal-memory-note">Add a photo later by replacing the matching file in assets/images/photos/.</p>
-      </div>
-    </div>
-
-    <div class="secret-toast" id="secret-toast" role="status" aria-live="polite"></div>
-
-  </main>
-
-  <!-- Optional user-provided music files. Place trimmed song segments in assets/audio/.
-       Browsers may block autoplay until the first user interaction; DARLING.EXE starts
-       music on the first tap/click and switches tracks automatically by chapter. -->
-  <audio id="bgMusic" preload="auto" loop playsinline></audio>
-  <audio id="sfxAudio" preload="auto"></audio>
-
-  <script src="js/app.js"></script>
-</body>
+    <script src="js/app.js"></script>
+  </body>
 </html>

@@ -5,13 +5,9 @@ const state = {
 
 const screens = [...document.querySelectorAll(".screen")];
 
-
-/* =========================================================
-   V4 POLISH — BOOT LOADING + SOUND + CHAPTER MUSIC
-   ========================================================= */
 const $ = (selector) => document.querySelector(selector);
 
-// Real boot sequence for the first page.
+
 let bootProgress = 0;
 const bootProgressEl = $("#bootProgress");
 const bootPercentEl = $("#loading-percent");
@@ -27,7 +23,7 @@ const boot = setInterval(() => {
 
   if (bootProgress >= 100) {
     clearInterval(boot);
-    if (bootTextEl) bootTextEl.textContent = "RJURI.EXE READY. MISSION AVAILABLE.";
+    if (bootTextEl) bootTextEl.textContent = "DARLING.EXE READY. MISSION AVAILABLE.";
     if (startGameButton) {
       startGameButton.disabled = false;
       startGameButton.classList.add("boot-ready");
@@ -35,7 +31,7 @@ const boot = setInterval(() => {
   }
 }, 180);
 
-// Lightweight Web Audio sound effects: no external sound files required.
+// web audio for sound effects
 let audioContext = null;
 function ensureAudioContext() {
   if (!audioContext) {
@@ -90,7 +86,6 @@ function setMusic(chapter) {
   bgMusic.volume = chapter === "start" ? 0.16 : 0.13;
   bgMusic.currentTime = 0;
   bgMusic.play().catch(() => {
-    // Autoplay can be blocked. The first user interaction retries it below.
   });
 }
 
@@ -100,7 +95,6 @@ function resumeMusic() {
   else setMusic(musicChapter || "start");
 }
 
-// Start music as soon as possible, then retry after the first user gesture.
 setMusic("start");
 document.addEventListener("pointerdown", resumeMusic, {once: false});
 document.addEventListener("keydown", resumeMusic, {once: false});
@@ -140,14 +134,12 @@ document.querySelectorAll("[data-next]").forEach(button => {
   });
 });
 
-/* V1 HERO CHOICE — retained, with feedback state reset on every choice */
 document.querySelectorAll(".choice-card").forEach(card => {
   card.addEventListener("click", () => {
     resumeMusic();
     const feedback = document.getElementById("hero-feedback");
     const next = document.getElementById("hero-next");
 
-    // Always clear the previous feedback styling first.
     feedback.classList.remove("feedback-wrong", "feedback-correct");
     feedback.style.background = "";
     feedback.style.borderColor = "";
@@ -184,15 +176,14 @@ document.querySelectorAll(".choice-card").forEach(card => {
   });
 });
 
-/* V3 MEMORY WEB — collectible memories + photo-ready lightbox */
 const memories = {
   "first-date": {
     label: "FIRST DATE",
-    title: "Movie + steakhouse.",
+    title: "Movie + Steakhouse.",
     text: "The first little chapter of us. A movie, good food, and the beginning of so many more dates.",
     icon: "🎬",
     photo: "assets/images/photos/first-date.jpg",
-    note: "Replace assets/images/photos/first-date.jpg with your actual photo when you're ready."
+    note: "It really took us one date, and we were already inseparable. I love you, my darling. ❤️"
   },
   "cafes": {
     label: "CAFE HOPPING",
@@ -200,7 +191,7 @@ const memories = {
     text: "One cafe turns into another cafe because apparently finding our next favorite place is part of the date.",
     icon: "☕",
     photo: "assets/images/photos/cafes.jpg",
-    note: "Replace assets/images/photos/cafes.jpg with a favorite cafe photo."
+    note: "To more cafe hopping adventures, and to more coffee dates with you. ☕"
   },
   "food": {
     label: "FOOD QUEST",
@@ -208,7 +199,7 @@ const memories = {
     text: "A very important rule of our relationship: there is probably food involved somewhere.",
     icon: "🍽️",
     photo: "assets/images/photos/food.jpg",
-    note: "Replace assets/images/photos/food.jpg with a food/date photo."
+    note: "You are my favorite food buddy, and I love that we can share our love for food together. 🍽️"
   },
   "rides": {
     label: "MOTORCYCLE ADVENTURES",
@@ -216,7 +207,7 @@ const memories = {
     text: "Getting on the motorcycle and looking for somewhere to go is already an adventure by itself.",
     icon: "🏍️",
     photo: "assets/images/photos/rides.jpg",
-    note: "Replace assets/images/photos/rides.jpg with a ride photo."
+    note: "We may not always know where we're going, but as long as we're together, it's always an adventure. 🏍️"
   },
   "games": {
     label: "GAME MODE",
@@ -224,7 +215,7 @@ const memories = {
     text: "Games, Spider-Man, and all the little things that make you happy. This node is permanently in gamer mode.",
     icon: "🎮",
     photo: "assets/images/photos/games.jpg",
-    note: "Replace assets/images/photos/games.jpg with a gaming or Spider-Man memory."
+    note: "Even if we don't always play the same games, I love that we can share our love for mind and relaxing games together. 🎮"
   },
   "secret": {
     label: "SECRET MEMORY",
@@ -232,7 +223,7 @@ const memories = {
     text: "For the memory we haven't remembered yet. One day we'll laugh and say, 'Remember when...?'",
     icon: "♡",
     photo: "assets/images/photos/secret.jpg",
-    note: "This is your blank slot. Put any future memory here."
+    note: "This is a secret memory, and I can't wait to make more memories with you, my darling. ♡"
   }
 };
 
@@ -287,7 +278,6 @@ document.getElementById("memory-card")?.addEventListener("click", () => openMemo
 document.querySelectorAll("[data-close-memory]").forEach(el => el.addEventListener("click", closeMemoryModal));
 document.addEventListener("keydown", event => { if (event.key === "Escape") closeMemoryModal(); });
 
-/* Hidden JO easter egg: tap the center 5 times. */
 let joTaps = 0;
 let joTapTimer = null;
 const secretToast = document.getElementById("secret-toast");
@@ -304,10 +294,10 @@ document.getElementById("jo-secret")?.addEventListener("click", () => {
   }
 });
 
-/* V2 WEB SHOOTER — robust touch/click version */
+// mission 2: web shooter minigame
 let shooterRunning = false;
 let hearts = 0;
-let shooterTime = 20;
+let shooterTime = 50;
 let shooterTimer = null;
 let shooterSpawner = null;
 
@@ -394,7 +384,6 @@ function startShooter() {
   }, 1000);
 }
 
-/* Event delegation makes the shooter reliable after screen transitions and on touch devices. */
 document.addEventListener("pointerup", (event) => {
   const start = event.target.closest?.("#start-shooter");
   if (start) {
@@ -411,7 +400,6 @@ document.addEventListener("click", (event) => {
   }
 });
 
-/* V2 BIRTHDAY BOSS */
 let bossHP = 100;
 
 document.getElementById("birthday-cake").addEventListener("click", () => {
@@ -431,7 +419,6 @@ document.getElementById("birthday-cake").addEventListener("click", () => {
   }
 });
 
-/* V2 RESTART */
 document.getElementById("restart-v2").addEventListener("click", () => {
   playTone("click");
   clearShooter();
@@ -446,7 +433,6 @@ document.getElementById("restart-v2").addEventListener("click", () => {
   showScreen("screen-start");
 });
 
-/* PERSONALIZATION */
 document.getElementById("boyfriend-name").textContent =
   localStorage.getItem("darlingPlayerName") || "RJURI";
 
