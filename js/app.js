@@ -285,7 +285,7 @@ document.getElementById("jo-secret")?.addEventListener("click", () => {
   joTaps++;
   clearTimeout(joTapTimer);
   joTapTimer = setTimeout(() => { joTaps = 0; }, 1300);
-  if (joTaps >= 5) {
+  if (joTaps >= 2) {
     joTaps = 0;
     updateXP(50);
     secretToast.textContent = "🕷️ SPIDER-SENSE UNLOCKED — JO = MY DARLING ♡";
