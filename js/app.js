@@ -341,7 +341,7 @@ const memoryPhotos = {
       image: "assets/images/photos/cafe4.PNG"
     },
     {
-      image: "assets/images/photos/cafe5.jpg"
+      image: "assets/images/photos/cafe5.JPG"
     }
   ],
 
@@ -357,16 +357,16 @@ const memoryPhotos = {
       image: "assets/images/photos/food3.jpg"
     },
     {
-      image: "assets/images/photos/food4.jpg"
+      image: "assets/images/photos/food4.JPG"
     },
     {
-      image: "assets/images/photos/food5.jpg"
+      image: "assets/images/photos/food5.JPG"
     },
     {
-      image: "assets/images/photos/food6.jpg"
+      image: "assets/images/photos/food6.JPG"
     },
     {
-      image: "assets/images/photos/food7.jpg"
+      image: "assets/images/photos/food7.JPG"
     }
   ],
 
@@ -406,11 +406,11 @@ const memoryPhotos = {
     },{
       image: "assets/images/photos/secret2.jpg"
     },{
-      image: "assets/images/photos/secret3.jpg"
+      image: "assets/images/photos/secret3.JPG"
     },{
-      image: "assets/images/photos/secret4.jpg"
+      image: "assets/images/photos/secret4.JPG"
     },{
-      image: "assets/images/photos/secret5.jpg"
+      image: "assets/images/photos/secret5.JPG"
     },{
       image: "assets/images/photos/secret6.jpg"
     },{
