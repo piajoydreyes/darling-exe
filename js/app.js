@@ -310,19 +310,19 @@ const memoryPhotos = {
 
   "first-date": [
     {
-      image: "assets/images/photos/fd1.heic"
+      image: "assets/images/photos/fd1.HEIC"
     },
     {
-      image: "assets/images/photos/fd2.heic",
+      image: "assets/images/photos/fd2.HEIC",
     },
     {
-      image: "assets/images/photos/fd3.heic"
+      image: "assets/images/photos/fd3.HEIC"
     },
     {
-      image: "assets/images/photos/fd4.heic",
+      image: "assets/images/photos/fd4.HEIC",
     },
     {
-      image: "assets/images/photos/fd5.heic"
+      image: "assets/images/photos/fd5.HEIC"
     }
   ],
 
