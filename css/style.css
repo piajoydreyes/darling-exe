@@ -730,7 +730,7 @@ h2 {
     display:grid;
     grid-template-columns:40px 1fr;
     gap:11px;padding:13px;align-items:start}.story-item>span{width:38px;height:38px;border-radius:12px;background:var(--blue);display:grid;place-items:center;font-weight:1000}.story-item strong,.story-item p,.story-item small{display:block}.story-item strong{font-size:11px}.story-item p{margin:4px 0;font-size:11px;color:var(--cream)}.story-item small{color:var(--muted);font-size:9px}
-    
+
 .love-letter{background:#fffaf0;color:#27304a;border-radius:20px;padding:22px;font-family:Georgia,serif;font-size:15px;line-height:1.7;box-shadow:var(--shadow)}.love-letter p{margin:0 0 17px}
 .couple-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:12px 0;padding:1px;overflow:hidden}.couple-stats div{background:var(--panel);text-align:center;padding:13px}.couple-stats span,.couple-stats strong{display:block}.couple-stats span{color:var(--muted);font-size:8px;letter-spacing:.12em}.couple-stats strong{color:var(--soft-blue);font-size:23px;margin-top:3px}
 .final-screen{text-align:center;background:radial-gradient(circle at 50% 45%,rgba(20,123,209,.15),transparent 45%),var(--night)}
@@ -764,3 +764,254 @@ body.modal-open{overflow:hidden}
 .feedback.feedback-correct{background:rgba(101,230,162,.11);border-color:rgba(101,230,162,.35);color:#b9ffd8}
 .feedback.feedback-wrong{background:rgba(230,36,41,.08);border-color:rgba(230,36,41,.25);color:#ffb4b6}
 #bootProgress{width:0;transition:width .12s linear}
+
+
+/* =========================================
+   MEMORY PHOTO CAROUSEL
+========================================= */
+
+.memory-gallery {
+  width: 100%;
+  margin-top: 18px;
+}
+
+.memory-carousel {
+  width: 100%;
+}
+
+.memory-carousel-viewport {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(169, 216, 255, 0.22);
+  border-radius: 16px;
+  background: rgba(8, 11, 22, 0.55);
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.memory-carousel-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+.memory-photo-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  overflow: hidden;
+}
+
+.memory-photo-frame {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #080b16;
+}
+
+.memory-photo-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memory-photo-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 14px 15px;
+  text-align: left;
+}
+
+.memory-photo-label {
+  color: #a9d8ff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.memory-photo-text {
+  color: #9ba6bf;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.memory-carousel-controls {
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.memory-carousel-arrow {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(169, 216, 255, 0.28);
+  border-radius: 50%;
+  background: #101a33;
+  color: #ffffff;
+  font: inherit;
+  font-size: 25px;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.memory-carousel-arrow:active:not(:disabled) {
+  transform: scale(0.92);
+  background: #e62429;
+  border-color: #ffffff;
+}
+
+.memory-carousel-arrow:disabled {
+  opacity: 0.28;
+  cursor: default;
+}
+
+.memory-carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+
+.memory-carousel-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(169, 216, 255, 0.3);
+  cursor: pointer;
+  transition: 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.memory-carousel-dot.active {
+  width: 22px;
+  border-radius: 999px;
+  background: #e62429;
+  box-shadow: 0 0 10px rgba(230, 36, 41, 0.4);
+}
+
+.memory-carousel-empty {
+  padding: 30px 16px;
+  border: 1px solid rgba(169, 216, 255, 0.22);
+  border-radius: 16px;
+  background: rgba(8, 11, 22, 0.55);
+  color: #9ba6bf;
+  text-align: center;
+  font-size: 0.78rem;
+}
+
+@media (max-width: 480px) {
+  .memory-gallery {
+    margin-top: 16px;
+  }
+
+  .memory-carousel-controls {
+    grid-template-columns: 40px 1fr 40px;
+  }
+
+  .memory-carousel-arrow {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ========================================
+   MISSION 05 - HEART.EXE QUIZ
+======================================== */
+.relationship-quiz{
+  padding:16px;
+  margin:8px 0 12px;
+}
+.quiz-progress{
+  font-size:9px;
+  font-weight:1000;
+  letter-spacing:.14em;
+  color:var(--soft-blue);
+  margin-bottom:12px;
+}
+.quiz-question h3{
+  font-size:16px;
+  line-height:1.3;
+  margin:7px 0 14px;
+}
+.quiz-options{
+  display:grid;
+  gap:9px;
+}
+.quiz-option{
+  width:100%;
+  min-height:48px;
+  padding:11px 13px;
+  border:1px solid rgba(169,216,255,.22);
+  border-radius:13px;
+  background:rgba(8,11,22,.5);
+  color:var(--white);
+  font:inherit;
+  font-size:11px;
+  font-weight:800;
+  text-align:left;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.quiz-option:active{transform:scale(.985)}
+.quiz-option.correct{
+  background:rgba(20,123,209,.25);
+  border-color:var(--soft-blue);
+  box-shadow:0 0 18px rgba(20,123,209,.18);
+}
+.quiz-option.wrong{
+  background:rgba(230,36,41,.18);
+  border-color:var(--red);
+  animation:quizShake .25s ease;
+}
+.quiz-option:disabled{cursor:default;opacity:1}
+.quiz-feedback{
+  min-height:18px;
+  margin-top:11px;
+  text-align:center;
+  font-size:10px;
+  font-weight:800;
+}
+.quiz-feedback.correct{color:var(--soft-blue)}
+.quiz-feedback.wrong{color:#ff8f96}
+@keyframes quizShake{
+  0%,100%{transform:translateX(0)}
+  30%{transform:translateX(-5px)}
+  70%{transform:translateX(5px)}
+}
+.heart-lock{
+  padding:22px 16px;
+  margin:12px 0 16px;
+  text-align:center;
+  border-color:rgba(255,127,163,.28);
+  background:radial-gradient(circle at 50% 35%,rgba(230,36,41,.16),transparent 55%),var(--panel);
+}
+.heart-lock-icon{
+  font-size:58px;
+  line-height:1;
+  margin-bottom:12px;
+  animation:heartPulse 1.5s ease-in-out infinite;
+}
+.heart-lock strong,.heart-lock small{display:block}
+.heart-lock strong{font-size:14px;margin-top:5px}
+.heart-lock small{font-size:9px;color:var(--muted);margin-top:4px;letter-spacing:.08em}
+.heart-lock-code{
+  margin-top:13px;
+  color:var(--pink);
+  letter-spacing:.35em;
+  font-size:12px;
+}
+@keyframes heartPulse{
+  0%,100%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(255,127,163,0))}
+  50%{transform:scale(1.08);filter:drop-shadow(0 0 13px rgba(255,127,163,.35))}
+}

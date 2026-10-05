@@ -108,20 +108,44 @@ function updateXP(amount = 0) {
   });
 }
 
-function showScreen(id) {
+function showScreen(id, addToHistory = true) {
+
   const previous = state.currentScreen;
-  screens.forEach(screen => screen.classList.toggle("active", screen.id === id));
+
+  screens.forEach(screen =>
+    screen.classList.toggle("active", screen.id === id)
+  );
+
   state.currentScreen = id;
-  window.scrollTo({ top: 0, behavior: "instant" });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "instant"
+  });
+
+  // Add the screen to browser history
+  if (addToHistory && previous !== id) {
+    history.pushState(
+      { screen: id },
+      "",
+      "#" + id.replace("screen-", "")
+    );
+  }
 
   if (previous !== id) {
+
     playTone("page");
+
     if (id === "screen-birthday") {
+
       setMusic("birthday");
       playTone("win");
+
     } else if (id === "screen-monthsary") {
+
       setMusic("monthsary");
       playTone("win");
+
     }
   }
 }
@@ -133,6 +157,111 @@ document.querySelectorAll("[data-next]").forEach(button => {
     showScreen(button.dataset.next);
   });
 });
+
+
+// ========================================
+// MISSION 05 - HEART.EXE RELATIONSHIP QUIZ
+// ========================================
+let quizQuestion = 0;
+let quizLocked = false;
+
+const quizQuestions = document.querySelectorAll(".quiz-question");
+const quizProgress = document.getElementById("quiz-progress");
+const quizFeedback = document.getElementById("quiz-feedback");
+const quizNext = document.getElementById("quiz-next");
+
+function showQuizQuestion(index) {
+  quizQuestions.forEach((question, i) => {
+    question.classList.toggle("hidden", i !== index);
+  });
+  if (quizProgress) {
+    quizProgress.textContent = `QUESTION ${String(index + 1).padStart(2, "0")} / ${quizQuestions.length}`;
+  }
+}
+
+document.querySelectorAll(".quiz-option").forEach(option => {
+  option.addEventListener("click", () => {
+    if (quizLocked) return;
+
+    const question = option.closest(".quiz-question");
+    if (!question) return;
+
+    const options = question.querySelectorAll(".quiz-option");
+    options.forEach(button => button.disabled = true);
+
+    if (option.dataset.answer === "correct") {
+      option.classList.add("correct");
+      playTone("correct");
+      updateXP(25);
+
+      if (quizFeedback) {
+        quizFeedback.textContent = quizQuestion === quizQuestions.length - 1
+          ? "ACCESS GRANTED. YOU KNOW US. ❤️"
+          : "CORRECT. NEXT QUESTION...";
+        quizFeedback.className = "quiz-feedback correct";
+      }
+
+      setTimeout(() => {
+        if (quizQuestion < quizQuestions.length - 1) {
+          quizQuestion++;
+          showQuizQuestion(quizQuestion);
+          if (quizFeedback) quizFeedback.textContent = "";
+          options.forEach(button => button.disabled = false);
+        } else {
+          quizLocked = true;
+          if (quizNext) quizNext.classList.remove("hidden");
+        }
+      }, 650);
+    } else {
+      option.classList.add("wrong");
+      playTone("wrong");
+      if (quizFeedback) {
+        quizFeedback.textContent = "NOT QUITE. Try again, Jo. 👀";
+        quizFeedback.className = "quiz-feedback wrong";
+      }
+      setTimeout(() => {
+        option.classList.remove("wrong");
+        options.forEach(button => button.disabled = false);
+      }, 500);
+    }
+  });
+});
+
+// ========================================
+// BROWSER BACK / FORWARD NAVIGATION
+// ========================================
+
+window.addEventListener("popstate", (event) => {
+
+  if (event.state && event.state.screen) {
+
+    // Restore the previous screen
+    // without creating another history entry
+    showScreen(event.state.screen, false);
+
+  } else {
+
+    // If there is no saved history state,
+    // return to the start screen
+    showScreen("screen-start", false);
+
+  }
+
+});
+
+// ========================================
+// INITIAL HISTORY STATE
+// ========================================
+
+if (state.currentScreen) {
+
+  history.replaceState(
+    { screen: state.currentScreen },
+    "",
+    "#" + state.currentScreen.replace("screen-", "")
+  );
+
+}
 
 document.querySelectorAll(".choice-card").forEach(card => {
   card.addEventListener("click", () => {
@@ -176,81 +305,370 @@ document.querySelectorAll(".choice-card").forEach(card => {
   });
 });
 
+
+const memoryPhotos = {
+
+  "first-date": [
+    {
+      image: "assets/images/photos/fd1.heic"
+    },
+    {
+      image: "assets/images/photos/fd2.heic",
+    },
+    {
+      image: "assets/images/photos/fd3.heic"
+    },
+    {
+      image: "assets/images/photos/fd4.heic",
+    },
+    {
+      image: "assets/images/photos/fd5.heic"
+    }
+  ],
+
+
+  "cafes": [
+    {
+      image: "assets/images/photos/cafe1.jpg"
+    },
+    {
+      image: "assets/images/photos/cafe2.jpg"
+    },
+    {
+      image: "assets/images/photos/cafe3.PNG"
+    },
+    {
+      image: "assets/images/photos/cafe4.PNG"
+    },
+    {
+      image: "assets/images/photos/cafe5.jpg"
+    }
+  ],
+
+
+  "food": [
+    {
+      image: "assets/images/photos/food1.jpg"
+    },
+    {
+      image: "assets/images/photos/food2.jpg"
+    },
+    {
+      image: "assets/images/photos/food3.jpg"
+    },
+    {
+      image: "assets/images/photos/food4.jpg"
+    },
+    {
+      image: "assets/images/photos/food5.jpg"
+    },
+    {
+      image: "assets/images/photos/food6.jpg"
+    },
+    {
+      image: "assets/images/photos/food7.jpg"
+    }
+  ],
+
+
+  "rides": [
+    {
+      image: "assets/images/photos/rides1.jpg"
+    },
+    {
+      image: "assets/images/photos/rides2.jpg"
+    }
+  ],
+
+
+  "escapades": [
+    {
+      image: "assets/images/photos/escp1.jpg"
+    },
+    {
+      image: "assets/images/photos/escp2.jpg"
+    },
+    {
+      image: "assets/images/photos/escp3.HEIC"
+    },
+    {
+      image: "assets/images/photos/escp4.HEIC"
+    },
+    {
+      image: "assets/images/photos/escp5.HEIC"
+    }
+  ],
+
+
+  "secret": [
+    {
+      image: "assets/images/photos/secret1.jpg"
+    },{
+      image: "assets/images/photos/secret2.jpg"
+    },{
+      image: "assets/images/photos/secret3.jpg"
+    },{
+      image: "assets/images/photos/secret4.jpg"
+    },{
+      image: "assets/images/photos/secret5.jpg"
+    },{
+      image: "assets/images/photos/secret6.jpg"
+    },{
+      image: "assets/images/photos/secret7.jpg"
+    },{
+      image: "assets/images/photos/secret8.jpg"
+    },{
+      image: "assets/images/photos/secret9.jpg"
+    },{
+      image: "assets/images/photos/secret10.jpg"
+    },{
+      image: "assets/images/photos/secret11.jpg"
+    },{
+      image: "assets/images/photos/secret12.jpg"
+    },{
+      image: "assets/images/photos/secret13.jpg"
+    }
+  ]
+
+};
+
+
+// ========================================
+// MEMORY DATA
+// ========================================
+
 const memories = {
   "first-date": {
-    label: "FIRST DATE",
-    title: "Movie + Steakhouse.",
-    text: "The first little chapter of us. A movie, good food, and the beginning of so many more dates.",
     icon: "🎬",
-    photo: "assets/images/photos/first-date.jpg",
-    note: "It really took us one date, and we were already inseparable. I love you, my darling. ❤️"
+    label: "FIRST DATE",
+    title: "The Beginning",
+    text: "Our first little adventure together."
   },
+
   "cafes": {
-    label: "CAFE HOPPING",
-    title: "Coffee, food, conversations, repeat.",
-    text: "One cafe turns into another cafe because apparently finding our next favorite place is part of the date.",
     icon: "☕",
-    photo: "assets/images/photos/cafes.jpg",
-    note: "To more cafe hopping adventures, and to more coffee dates with you. ☕"
+    label: "CAFE HOPPING",
+    title: "Coffee + You",
+    text: "Our little adventures finding cute places to eat and hang out."
   },
+
   "food": {
-    label: "FOOD QUEST",
-    title: "Every date needs food.",
-    text: "A very important rule of our relationship: there is probably food involved somewhere.",
     icon: "🍽️",
-    photo: "assets/images/photos/food.jpg",
-    note: "You are my favorite food buddy, and I love that we can share our love for food together. 🍽️"
+    label: "FOOD ADVENTURES",
+    title: "Food Quest",
+    text: "Because apparently every adventure needs food. 😂"
   },
+
   "rides": {
-    label: "MOTORCYCLE ADVENTURES",
-    title: "No destination? Let's ride.",
-    text: "Getting on the motorcycle and looking for somewhere to go is already an adventure by itself.",
     icon: "🏍️",
-    photo: "assets/images/photos/rides.jpg",
-    note: "We may not always know where we're going, but as long as we're together, it's always an adventure. 🏍️"
+    label: "MOTORCYCLE RIDES",
+    title: "Road Quest",
+    text: "Even with noo destination in mind. Just us, the motorcycle, and wherever the road takes us."
   },
-  "games": {
-    label: "GAME MODE",
-    title: "Player 01: Rjuri.",
-    text: "Games, Spider-Man, and all the little things that make you happy. This node is permanently in gamer mode.",
-    icon: "🎮",
-    photo: "assets/images/photos/games.jpg",
-    note: "Even if we don't always play the same games, I love that we can share our love for mind and relaxing games together. 🎮"
+
+  "escapades": {
+    icon: "🍀",
+    label: "ESCAPEDS",
+    title: "Our Humble Beginning",
+    text: "A spontaneous little adventure that started it all. A little bit of luck, a little bit of fate, and a whole lot of us. ❤️"
   },
+
   "secret": {
+    icon: "🤍",
     label: "SECRET MEMORY",
-    title: "Still loading...",
-    text: "For the memory we haven't remembered yet. One day we'll laugh and say, 'Remember when...?'",
-    icon: "♡",
-    photo: "assets/images/photos/secret.jpg",
-    note: "This is a secret memory, and I can't wait to make more memories with you, my darling. ♡"
+    title: "A Little Secret",
+    text: "No secrets here, just us and our cute moments."
   }
 };
+
+
+// ========================================
+// MEMORY MODAL
+// ========================================
+
+function openMemoryModal(memoryKey) {
+  if (!memoryModal) return;
+
+  const memory = memories[memoryKey];
+  if (!memory) return;
+
+  const label = document.getElementById("modal-memory-label");
+  const title = document.getElementById("modal-memory-title");
+  const copy = document.getElementById("modal-memory-copy");
+  const note = document.getElementById("modal-memory-note");
+
+  if (label) label.textContent = memory.label;
+  if (title) title.textContent = memory.title;
+  if (copy) copy.textContent = memory.text;
+
+  renderMemoryPhotos(memoryKey);
+
+  if (note) {
+    note.textContent = "Tap a photo heading to open or close it. ❤️";
+  }
+
+  memoryModal.hidden = false;
+  memoryModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+
+  playTone("page");
+}
 
 let selectedMemory = "first-date";
 const memoryModal = document.getElementById("memory-modal");
 
-function openMemoryModal(key) {
-  const m = memories[key];
-  if (!m || !memoryModal) return;
-  selectedMemory = key;
-  document.getElementById("modal-memory-label").textContent = m.label;
-  document.getElementById("modal-memory-title").textContent = m.title;
-  document.getElementById("modal-memory-copy").textContent = m.text;
-  document.getElementById("modal-memory-note").textContent = m.note;
-  const photo = document.getElementById("modal-memory-photo");
-  photo.textContent = m.icon;
-  photo.style.backgroundImage = `url("${m.photo}")`;
-  photo.classList.remove("has-photo");
-  const testImage = new Image();
-  testImage.onload = () => photo.classList.add("has-photo");
-  testImage.onerror = () => {};
-  testImage.src = m.photo;
-  memoryModal.hidden = false;
-  memoryModal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
-}
+function renderMemoryPhotos(memoryKey) {
+  const gallery = document.querySelector("#memory-gallery");
+  if (!gallery) return;
 
+  gallery.innerHTML = "";
+
+  const photos = memoryPhotos[memoryKey] || [];
+
+  if (!photos.length) {
+    gallery.innerHTML = `
+      <div class="memory-carousel-empty">
+        📸 More memories coming soon. ❤️
+      </div>
+    `;
+    return;
+  }
+
+  let currentIndex = 0;
+
+  const carousel = document.createElement("div");
+  carousel.className = "memory-carousel";
+
+  const viewport = document.createElement("div");
+  viewport.className = "memory-carousel-viewport";
+
+  const track = document.createElement("div");
+  track.className = "memory-carousel-track";
+
+  photos.forEach((photo, index) => {
+    const slide = document.createElement("article");
+    slide.className = "memory-photo-slide";
+    slide.setAttribute("aria-hidden", index === 0 ? "false" : "true");
+
+    slide.innerHTML = `
+      <div class="memory-photo-frame">
+        <img
+          src="${photo.image}"
+          alt="${photo.caption || `Memory photo ${index + 1}` }"
+          loading="${index === 0 ? "eager" : "lazy"}"
+        >
+      </div>
+      
+    `;
+
+    track.appendChild(slide);
+  });
+
+  viewport.appendChild(track);
+
+  const controls = document.createElement("div");
+  controls.className = "memory-carousel-controls";
+
+  const previousButton = document.createElement("button");
+  previousButton.type = "button";
+  previousButton.className = "memory-carousel-arrow";
+  previousButton.setAttribute("aria-label", "Previous photo");
+  previousButton.innerHTML = "‹";
+
+  const dots = document.createElement("div");
+  dots.className = "memory-carousel-dots";
+  dots.setAttribute("role", "tablist");
+  dots.setAttribute("aria-label", "Memory photos");
+
+  const nextButton = document.createElement("button");
+  nextButton.type = "button";
+  nextButton.className = "memory-carousel-arrow";
+  nextButton.setAttribute("aria-label", "Next photo");
+  nextButton.innerHTML = "›";
+
+  photos.forEach((photo, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "memory-carousel-dot" + (index === 0 ? " active" : "");
+    dot.setAttribute("role", "tab");
+    dot.setAttribute("aria-label", `Show photo ${index + 1}`);
+    dot.setAttribute("aria-selected", index === 0 ? "true" : "false");
+    dots.appendChild(dot);
+
+    dot.addEventListener("click", () => {
+      goToSlide(index);
+      playTone("click");
+    });
+  });
+
+  controls.append(previousButton, dots, nextButton);
+  carousel.append(viewport, controls);
+  gallery.appendChild(carousel);
+
+  const updateCarousel = () => {
+    track.style.transform = `translate3d(-${currentIndex * 100}%, 0, 0)`;
+
+    track.querySelectorAll(".memory-photo-slide").forEach((slide, index) => {
+      slide.setAttribute("aria-hidden", index === currentIndex ? "false" : "true");
+    });
+
+    dots.querySelectorAll(".memory-carousel-dot").forEach((dot, index) => {
+      const active = index === currentIndex;
+      dot.classList.toggle("active", active);
+      dot.setAttribute("aria-selected", active ? "true" : "false");
+    });
+
+    previousButton.disabled = currentIndex === 0;
+    nextButton.disabled = currentIndex === photos.length - 1;
+  };
+
+  const goToSlide = (index) => {
+    currentIndex = Math.max(0, Math.min(index, photos.length - 1));
+    updateCarousel();
+  };
+
+  previousButton.addEventListener("click", () => {
+    goToSlide(currentIndex - 1);
+    playTone("click");
+  });
+
+  nextButton.addEventListener("click", () => {
+    goToSlide(currentIndex + 1);
+    playTone("click");
+  });
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchActive = false;
+
+  viewport.addEventListener("touchstart", event => {
+    const touch = event.changedTouches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchActive = true;
+  }, { passive: true });
+
+  viewport.addEventListener("touchend", event => {
+    if (!touchActive) return;
+    touchActive = false;
+
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+
+    if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+    if (deltaX < 0 && currentIndex < photos.length - 1) {
+      goToSlide(currentIndex + 1);
+      playTone("click");
+    } else if (deltaX > 0 && currentIndex > 0) {
+      goToSlide(currentIndex - 1);
+      playTone("click");
+    }
+  }, { passive: true });
+
+  updateCarousel();
+}
 function closeMemoryModal() {
   if (!memoryModal) return;
   memoryModal.hidden = true;
@@ -274,7 +692,9 @@ document.querySelectorAll(".memory-node").forEach(node => {
   });
 });
 
-document.getElementById("memory-card")?.addEventListener("click", () => openMemoryModal(selectedMemory));
+document.getElementById("memory-card")?.addEventListener("click", () => {
+  openMemoryModal(selectedMemory);
+});
 document.querySelectorAll("[data-close-memory]").forEach(el => el.addEventListener("click", closeMemoryModal));
 document.addEventListener("keydown", event => { if (event.key === "Escape") closeMemoryModal(); });
 
@@ -419,7 +839,16 @@ document.getElementById("birthday-cake").addEventListener("click", () => {
   }
 });
 
-document.getElementById("restart-v2").addEventListener("click", () => {
+document.getElementById("restart-")?.addEventListener("click", () => {
+  quizQuestion = 0;
+  quizLocked = false;
+  if (quizNext) quizNext.classList.add("hidden");
+  if (quizFeedback) quizFeedback.textContent = "";
+  showQuizQuestion(0);
+  document.querySelectorAll(".quiz-option").forEach(button => {
+    button.disabled = false;
+    button.classList.remove("correct", "wrong");
+  });
   playTone("click");
   clearShooter();
   bossHP = 100;
