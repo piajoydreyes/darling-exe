@@ -463,12 +463,12 @@ const memories = {
     icon: "🏍️",
     label: "MOTORCYCLE RIDES",
     title: "Road Quest",
-    text: "Even with noo destination in mind. Just us, the motorcycle, and wherever the road takes us."
+    text: "Even with no destination in mind. Just us, the motorcycle, and wherever the road takes us."
   },
 
   "escapades": {
     icon: "🍀",
-    label: "ESCAPEDS",
+    label: "ESCAPADES",
     title: "Our Humble Beginning",
     text: "A spontaneous little adventure that started it all. A little bit of luck, a little bit of fate, and a whole lot of us. ❤️"
   },
@@ -495,7 +495,7 @@ function openMemoryModal(memoryKey) {
   const label = document.getElementById("modal-memory-label");
   const title = document.getElementById("modal-memory-title");
   const copy = document.getElementById("modal-memory-copy");
-  const note = document.getElementById("modal-memory-note");
+  // const note = document.getElementById("modal-memory-note");
 
   if (label) label.textContent = memory.label;
   if (title) title.textContent = memory.title;
@@ -503,9 +503,9 @@ function openMemoryModal(memoryKey) {
 
   renderMemoryPhotos(memoryKey);
 
-  if (note) {
-    note.textContent = "Tap a photo heading to open or close it. ❤️";
-  }
+  // if (note) {
+  //   note.textContent = "Tap a photo heading to open or close it. ❤️";
+  // }
 
   memoryModal.hidden = false;
   memoryModal.setAttribute("aria-hidden", "false");
